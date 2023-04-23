@@ -15,9 +15,9 @@ public class HomePage {
     }
 
     @FindBy(css = ".profile_info>h2")
-    public WebElement welcomeElm;
+    private WebElement welcomeElm;
 
-    public HomePage expectWelcomeElementIsVisible() {
+    public HomePage assertWelcomeElementIsShown() {
         Assert.assertTrue(welcomeElm.isDisplayed(), "Welcome element is not shown.");
         Assert.assertTrue(welcomeElm.getText().contains("Welcome"), "Welcome element text: '" + welcomeElm.getText() + "' does not contain word 'Welcome'");
 

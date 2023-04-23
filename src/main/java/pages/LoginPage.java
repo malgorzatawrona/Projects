@@ -63,7 +63,11 @@ public class LoginPage {
         Assert.assertTrue(doesErrorExists);
         return this;
     }
+    public LoginPage expectEmailError(String error){
+        Assert.assertEquals(emailError.getText(), error);
+        return this;
 
+    }
     public CreateAccountPage goToRegisterPage (){
         registerLnk.click();
         return new CreateAccountPage(driver);
