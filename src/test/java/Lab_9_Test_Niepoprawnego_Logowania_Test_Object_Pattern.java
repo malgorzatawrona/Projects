@@ -17,9 +17,7 @@ public class Lab_9_Test_Niepoprawnego_Logowania_Test_Object_Pattern {
         public void incorrectLoginTest() {
 
             System.setProperty("webdriver.chrome.driver", "c:/dev/driver/chromedriver.exe");
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--remote-allow-origins=*");
-            WebDriver driver = new ChromeDriver(options);
+            WebDriver driver = new ChromeDriver();
 
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             driver.manage().window().maximize();

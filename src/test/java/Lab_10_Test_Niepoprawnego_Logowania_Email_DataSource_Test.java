@@ -2,17 +2,25 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.HomePage;
 import pages.LoginPage;
-
 import java.time.Duration;
 
-public class Lab_8_Test_Poprawnego_Logowania_POP_Test {
+public class Lab_10_Test_Niepoprawnego_Logowania_Email_DataSource_Test {
     private WebDriver driver;
 
-    @Test
-    public void correctLoginTest() {
+    @DataProvider
+    public Object[][] getWrongEmails(){
+        return new Object[][]{
+                {"test"},
+                {"admin"},
+                {"@test"}
+        };
+    }
+
+    @Test(dataProvider = "getWrongEmails")
+    public void incorrectEmailTest(String wrongEmail) {
 
         System.setProperty("webdriver.chrome.driver", "c:/dev/driver/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
@@ -22,11 +30,10 @@ public class Lab_8_Test_Poprawnego_Logowania_POP_Test {
         driver.get("http://localhost:4444/");
 
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.typeEmail("test@test.com");
-        loginPage.typePassword("Test1!");
-        HomePage homePage = loginPage.submitLogin();
+        loginPage.typeEmail(wrongEmail);
+        loginPage.submitLoginWithFailure();
 
-        homePage.expectWelcomeElementIsVisible();
+        Assert.assertEquals(loginPage.emailError.getText(), "The Email field is not a valid e-mail address.");
 
         driver.quit();
 

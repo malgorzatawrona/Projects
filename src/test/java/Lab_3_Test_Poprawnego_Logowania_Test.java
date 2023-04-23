@@ -12,9 +12,7 @@ public class Lab_3_Test_Poprawnego_Logowania_Test {
     @Test
     public void correctLoginTest(){
         System.setProperty("webdriver.chrome.driver", "c:/dev/driver/chromedriver.exe");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        WebDriver driver = new ChromeDriver(options);
+        WebDriver driver = new ChromeDriver();
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();

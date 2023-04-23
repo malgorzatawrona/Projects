@@ -15,9 +15,7 @@ public class Lab_6_Test_Niepoprawnego_Logowania_Haslo_Test {
         public void incorrectLoginTestWrongPassword() {
 
             System.setProperty("webdriver.chrome.driver", "c:/dev/driver/chromedriver.exe");
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--remote-allow-origins=*");
-            WebDriver driver = new ChromeDriver(options);
+            WebDriver driver = new ChromeDriver();
 
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             driver.manage().window().maximize();

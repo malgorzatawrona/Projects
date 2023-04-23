@@ -28,6 +28,9 @@ public class LoginPage {
     @FindBy(css = ".validation-summary-errors>ul>li")
     public List<WebElement> loginErrors;
 
+    @FindBy(id = "Email-error")
+    public WebElement emailError;
+
 
     public LoginPage typeEmail(String email) {
         emailTxt.clear();
