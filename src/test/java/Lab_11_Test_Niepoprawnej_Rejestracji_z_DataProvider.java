@@ -3,10 +3,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.CreateAccountPage;
 import pages.LoginPage;
 import java.time.Duration;
 
-public class Lab_10_Test_Niepoprawnego_Logowania_Email_DataSource_Test {
+
+public class Lab_11_Test_Niepoprawnej_Rejestracji_z_DataProvider {
     private WebDriver driver;
 
     @DataProvider
@@ -19,7 +21,7 @@ public class Lab_10_Test_Niepoprawnego_Logowania_Email_DataSource_Test {
     }
 
     @Test(dataProvider = "getWrongEmails")
-    public void incorrectEmailTest(String wrongEmail) {
+    public void incorrectRegister(String wrongEmail){
 
         System.setProperty("webdriver.chrome.driver", "c:/dev/driver/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
@@ -29,12 +31,16 @@ public class Lab_10_Test_Niepoprawnego_Logowania_Email_DataSource_Test {
         driver.get("http://localhost:4444/");
 
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.typeEmail(wrongEmail);
-        loginPage.submitLoginWithFailure();
+        CreateAccountPage createAccountPage = loginPage.goToRegisterPage();
+        createAccountPage.typeEmail(wrongEmail);
+        createAccountPage.typePassword("Test1!");
+        createAccountPage.typeConfirmPassword("Test1!");
+        createAccountPage.submitRegisterWithFailure();
 
-        Assert.assertEquals(loginPage.emailError.getText(), "The Email field is not a valid e-mail address.");
+        Assert.assertEquals(createAccountPage.emailError.getText(), "The Email field is not a valid e-mail address.");
 
         driver.quit();
 
     }
+
 }

@@ -31,6 +31,9 @@ public class LoginPage {
     @FindBy(id = "Email-error")
     public WebElement emailError;
 
+    @FindBy (css = "a[href*=Register]")
+    public WebElement registerLnk;
+
 
     public LoginPage typeEmail(String email) {
         emailTxt.clear();
@@ -60,4 +63,11 @@ public class LoginPage {
         Assert.assertTrue(doesErrorExists);
         return this;
     }
+
+    public CreateAccountPage goToRegisterPage (){
+        registerLnk.click();
+        return new CreateAccountPage(driver);
+
+    }
+
 }
