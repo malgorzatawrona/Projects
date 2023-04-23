@@ -1,4 +1,6 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
@@ -26,15 +28,9 @@ public class Lab_9_Test_Niepoprawnego_Logowania_Test_Object_Pattern {
             LoginPage loginPage = new LoginPage(driver);
             loginPage.typeEmail("test2@test.com");
             loginPage.typePassword("Test1!");
-            HomePage homePage = loginPage.submitLogin();
-
-
-            Assert.assertTrue(homePage.welcomeElm.isDisplayed(), "Welcome element is not shown." );
-            Assert.assertTrue(homePage.welcomeElm.getText().contains("Welcome"), "Welcome element text: '" + homePage.welcomeElm.getText() + "' does not contain word 'Welcome'");
+            loginPage.submitLoginWithFailure();
+            loginPage.expectLoginError("Invalid login attempt.");
 
             driver.quit();
-
         }
     }
-}
-// do dokończenia i poprawy

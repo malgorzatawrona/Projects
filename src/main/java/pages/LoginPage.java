@@ -4,6 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+
+import java.util.List;
 
 public class LoginPage {
     protected WebDriver driver;
@@ -21,6 +24,10 @@ public class LoginPage {
 
     @FindBy(css = "button[type=submit]")
     private WebElement loginBtn;
+
+    @FindBy(css = ".validation-summary-errors>ul>li")
+    public List<WebElement> loginErrors;
+
 
     public LoginPage typeEmail(String email) {
         emailTxt.clear();
@@ -40,6 +47,14 @@ public class LoginPage {
     }
     public LoginPage submitLoginWithFailure(){
         loginBtn.click();
+        return this;
+    }
+
+    public LoginPage expectLoginError(String expError){
+        boolean doesErrorExists = loginErrors
+                .stream()
+                .anyMatch(validationError -> validationError.getText().equals(expError));
+        Assert.assertTrue(doesErrorExists);
         return this;
     }
 }

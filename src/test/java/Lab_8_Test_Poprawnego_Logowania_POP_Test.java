@@ -28,9 +28,7 @@ public class Lab_8_Test_Poprawnego_Logowania_POP_Test {
         loginPage.typePassword("Test1!");
         HomePage homePage = loginPage.submitLogin();
 
-
-        Assert.assertTrue(homePage.welcomeElm.isDisplayed(), "Welcome element is not shown." );
-        Assert.assertTrue(homePage.welcomeElm.getText().contains("Welcome"), "Welcome element text: '" + homePage.welcomeElm.getText() + "' does not contain word 'Welcome'");
+        homePage.expectWelcomeElementIsVisible();
 
         driver.quit();
 
