@@ -1,3 +1,4 @@
+import config.Config;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,13 +12,13 @@ public class Lab_3_Test_Poprawnego_Logowania_Test {
 
     @Test
     public void correctLoginTest(){
-        System.setProperty("webdriver.chrome.driver", "c:/dev/driver/chromedriver.exe");
+
         WebDriver driver = new ChromeDriver();
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
 
-        driver.get("http://localhost:4444/");
+        driver.get(new Config().getApplicationUrl());
 
         WebElement emailTxt = driver.findElement(By.cssSelector("#Email"));
         emailTxt.sendKeys("test@test.com");
