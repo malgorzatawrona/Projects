@@ -90,4 +90,7 @@ public class HomePage {
 
         return new DashboardsPage(driver);
     }
+    public AddNewProcess clickAddNewProcess(){
+
+    }
 }
