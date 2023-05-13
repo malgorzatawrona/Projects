@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
 
@@ -29,17 +30,28 @@ public class HomePage {
         return this;
     }
 
-    @FindBy (css=".menu-workspace")
+    @FindBy(css = ".menu-workspace")
     private WebElement workspaceNav;
 
-    @FindBy (css="a[href$=Projects]")
+    @FindBy(css = ".menu-home")
+    private WebElement homeNav;
+
+    @FindBy(css = "a[href$=Projects]")
     private WebElement processesMenu;
+
+    @FindBy(css = "a[href$=Characteristics]")
+    private WebElement characteristicsMenu;
+
+    @FindBy(linkText = "Dashboard")
+    private WebElement dashboardsMenu;
+
 
     private boolean isParentExpanded(WebElement menuLink) {
         WebElement parent = menuLink.findElement(By.xpath("./.."));
 
         return parent.getAttribute("class").contains("active");
     }
+
 
     public ProcessesPage goToProcesses() {
         if (!isParentExpanded(workspaceNav)) {
@@ -53,4 +65,29 @@ public class HomePage {
         return new ProcessesPage(driver);
     }
 
+
+    public CharacteristicsPage goToCharacteristic() {
+        if (!isParentExpanded(workspaceNav)) {
+            workspaceNav.click();
+        }
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(characteristicsMenu));
+
+        characteristicsMenu.click();
+
+        return new CharacteristicsPage(driver);
+
+    }
+
+    public DashboardsPage goToDashboards() {
+        if (!isParentExpanded(homeNav)) {
+            homeNav.click();
+        }
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(dashboardsMenu));
+
+        dashboardsMenu.click();
+
+        return new DashboardsPage(driver);
+    }
 }
