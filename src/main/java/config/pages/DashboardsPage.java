@@ -1,9 +1,8 @@
-package pages;
+package config.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 
@@ -18,7 +17,6 @@ public class DashboardsPage extends HomePage {
 
     public DashboardsPage assertDashboardUrl(String expectedUrl) {
         Assert.assertEquals(driver.getCurrentUrl(), expectedUrl);
-
         return this;
     }
 

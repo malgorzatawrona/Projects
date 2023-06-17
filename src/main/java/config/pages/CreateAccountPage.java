@@ -1,4 +1,4 @@
-package pages;
+package config.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,6 +33,11 @@ public class CreateAccountPage {
     @FindBy(id = "Email-error")
     public WebElement emailError;
 
+    @FindBy(id = "ConfirmPassword-error")
+    private WebElement passwordDontMatchMassage;
+
+    @FindBy(css = "div.validation-summary-errors")
+    private WebElement wrongPasswordMessage;
 
     public CreateAccountPage typeEmail(String email) {
         emailTxt.clear();
@@ -60,11 +65,20 @@ public class CreateAccountPage {
     public CreateAccountPage submitRegisterWithFailure() {
         registerBtn.click();
         return this;
-
     }
 
     public CreateAccountPage assertCreateMessage() {
         Assert.assertEquals(emailError.getText(), "The Email field is not a valid e-mail address.");
+        return this;
+    }
+
+    public CreateAccountPage checkPasswordsDontMatchAlert (){
+        Assert.assertEquals(passwordDontMatchMassage.getText(),"The password and confirmation password do not match.");
+        return this;
+    }
+
+    public CreateAccountPage checkWrongPasswordMessage (String message){
+        Assert.assertEquals(wrongPasswordMessage.getText(),message);
         return this;
     }
 }

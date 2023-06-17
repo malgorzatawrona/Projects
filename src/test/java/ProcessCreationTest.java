@@ -1,14 +1,9 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.LoginPage;
-import pages.ProcessesPage;
+import config.pages.LoginPage;
 
 import java.util.UUID;
 
-public class Lab_16_Test_Tworzenia_Procesu_Test extends SeleniumBaseTest {
-
+public class ProcessCreationTest extends SeleniumBaseTest {
 
 @Test
     public void addProcessTest(){
@@ -21,7 +16,7 @@ public class Lab_16_Test_Tworzenia_Procesu_Test extends SeleniumBaseTest {
                 .goToProcesses()
                 .clickAddNewProcess()
                 .typeName(processName)
-                .submit(Create)
-                .assertProcess(processName."","");
-}
+                .submitCreate()
+                .assertProcess(processName,"","");
+    }
 }

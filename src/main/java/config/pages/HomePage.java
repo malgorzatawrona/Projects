@@ -1,5 +1,4 @@
-package pages;
-
+package config.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,8 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import java.time.Duration;
 
 public class HomePage {
@@ -76,7 +73,6 @@ public class HomePage {
         characteristicsMenu.click();
 
         return new CharacteristicsPage(driver);
-
     }
 
     public DashboardsPage goToDashboards() {
@@ -89,8 +85,5 @@ public class HomePage {
         dashboardsMenu.click();
 
         return new DashboardsPage(driver);
-    }
-    public AddNewProcess clickAddNewProcess(){
-
     }
 }

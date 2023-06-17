@@ -1,3 +1,4 @@
+import config.Config;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -9,12 +10,12 @@ public class SeleniumBaseTest {
     protected WebDriver driver;
 
     @BeforeMethod
-    public void baseBeforeMetod(){
+    public void baseBeforeMethod(){
 //        System.setProperty("webdriver.chrome.driver", "c:/dev/driver/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-        driver.get("http://localhost:4444/");
+        driver.get(new Config().getApplicationUrl());
     }
     @AfterMethod
     public void baseAfterMethod(){

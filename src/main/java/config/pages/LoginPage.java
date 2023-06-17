@@ -1,12 +1,9 @@
-package pages;
-
+package config.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-
-import java.util.List;
 
 public class LoginPage {
     protected WebDriver driver;
@@ -26,14 +23,14 @@ public class LoginPage {
     private WebElement loginBtn;
 
     @FindBy(css = ".validation-summary-errors>ul>li")
-    public List<WebElement> loginErrors;
+//    public List<WebElement> loginErrors;
+    private WebElement loginError;
 
     @FindBy(id = "Email-error")
     public WebElement emailError;
 
     @FindBy (css = "a[href*=Register]")
     public WebElement registerLnk;
-
 
     public LoginPage typeEmail(String email) {
         emailTxt.clear();
@@ -51,27 +48,28 @@ public class LoginPage {
         loginBtn.click();
         return new HomePage(driver);
     }
+
     public LoginPage submitLoginWithFailure(){
         loginBtn.click();
         return this;
     }
 
     public LoginPage expectLoginError(String expError){
-        boolean doesErrorExists = loginErrors
-                .stream()
-                .anyMatch(validationError -> validationError.getText().equals(expError));
-        Assert.assertTrue(doesErrorExists);
+//        boolean doesErrorExists = loginErrors
+//                .stream()
+//                .anyMatch(validationError -> validationError.getText().equals(expError));
+//        Assert.assertTrue(doesErrorExists);
+        Assert.assertEquals(expError, loginError.getText());
         return this;
     }
+
     public LoginPage expectEmailError(String error){
         Assert.assertEquals(emailError.getText(), error);
         return this;
-
     }
+
     public CreateAccountPage goToRegisterPage (){
         registerLnk.click();
         return new CreateAccountPage(driver);
-
     }
-
 }
